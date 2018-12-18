@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+        <!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+        'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+<mapper namespace='transfer.dao.mappers.AccountMapper'>
+    <select id='getByAccountNumber' parameterType='string' resultType='transfer.model.Account'>
+        SELECT
+            account_number as accountNumber,
+            amount
+        FROM ACCOUNTS
+        WHERE account_number = #{accountNumber} FOR UPDATE
+    </select>
+    <resultMap type='Account' id='AccountResult'>
+        <result property='accountNumber' column='account_number'/>
+        <result property='amount' column='amount'/>
+    </resultMap>
+    <select id='getAll' resultMap='AccountResult'>
+        SELECT
+            account_number,
+            amount
+        FROM ACCOUNTS
+    </select>
+    <insert id='insert' parameterType='Account'>
+        INSERT INTO ACCOUNTS(account_number, amount)
+        VALUES(#{accountNumber}, #{amount})
+    </insert>
+    <insert id='update' parameterType='Account'>
+        UPDATE ACCOUNTS
+        SET amount = #{amount}
+        WHERE account_number = #{accountNumber}
+    </insert>
+    <delete id='delete' parameterType='string'>
+        DELETE FROM ACCOUNTS WHERE account_number = #{accountNumber}
+    </delete>
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <property name="schemaName" value="transmitter" dbms="mysql,oracle,postgresql" />
+    <changeSet author="ibnesterov" id="2018-12-04-1">
+        <comment>Создание списка счетов</comment>
+        <createTable tableName="ACCOUNTS" remarks="Счета">
+            <column name="ACCOUNT_NUMBER" type="VARCHAR(20)" remarks="Номер счета">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="AMOUNT" type="NUMBER" defaultValue="0" remarks="Сумма">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <insert tableName="ACCOUNTS">
+            <column name="ACCOUNT_NUMBER" value="40817810990011274427"/>
+            <column name="AMOUNT" value="1000.00"/>
+        </insert>
+        <insert tableName="ACCOUNTS">
+            <column name="ACCOUNT_NUMBER" value="40817810990011274428"/>
+            <column name="AMOUNT" value="1200.00"/>
+        </insert>
+        <insert tableName="ACCOUNTS">
+            <column name="ACCOUNT_NUMBER" value="40817810990011274429"/>
+            <column name="AMOUNT" value="500.00"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
